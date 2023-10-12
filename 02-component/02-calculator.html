@@ -39,21 +39,34 @@
         function Calculator2() {
                 const [n1, setN1] = React.useState(0)
                 const [n2, setN2] = React.useState(0)
+                const [operation, setOperation] = React.useState('')
                 const [result, setResult] = React.useState(0)
-                const onAddClick = () => {
-                    setResult(n1 + n2)
-                    setN1(0)
-                    setN2(0)
+               
+                const onBtnCalculateClick = () => {
+                    switch (operation) {
+                        case 'add':
+                            setResult(n1 + n2)
+                            break;
+                        case 'subtract':
+                            setResult(n1 - n2)
+                            break;
+                        case 'multiply':
+                            setResult(n1 * n2)
+                            break;
+                        case 'divide':
+                            setResult(n1 / n2)
+                            break;
+                    
+                        default:
+                            break;
+                    }
                 }
-                const onSubtractClick = () => setResult(n1 - n2)
-                const onMultiplyClick = () => setResult(n1 * n2)
-                const onDivideClick = () => setResult(n1 / n2)
                 return (
                     <div>
                         <h1>Calculator-2</h1>
                         <input type="number" value={n1} onInput={evt => setN1(parseInt(evt.target.value))} />
                         <input type="number" value={n2} onInput={evt => setN2(parseInt(evt.target.value))} />
-                        <select name="" id="">
+                        <select onChange={ evt => setOperation(evt.target.value)}>
                             <option value="">---Select Operation---</option>
                             <option value="add">Add</option>
                             <option value="subtract">Subtract</option>
@@ -61,7 +74,7 @@
                             <option value="divide">Divide</option>
                         </select>
                         <br />
-                        <button>Calculate</button>
+                        <button onClick={onBtnCalculateClick}>Calculate</button>
                         <div>{result}</div>
                     </div>
                 )
