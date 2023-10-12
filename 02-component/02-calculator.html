@@ -35,9 +35,45 @@
                 </div>
             )
         }
+
+        function Calculator2() {
+                const [n1, setN1] = React.useState(0)
+                const [n2, setN2] = React.useState(0)
+                const [result, setResult] = React.useState(0)
+                const onAddClick = () => {
+                    setResult(n1 + n2)
+                    setN1(0)
+                    setN2(0)
+                }
+                const onSubtractClick = () => setResult(n1 - n2)
+                const onMultiplyClick = () => setResult(n1 * n2)
+                const onDivideClick = () => setResult(n1 / n2)
+                return (
+                    <div>
+                        <h1>Calculator-2</h1>
+                        <input type="number" value={n1} onInput={evt => setN1(parseInt(evt.target.value))} />
+                        <input type="number" value={n2} onInput={evt => setN2(parseInt(evt.target.value))} />
+                        <select name="" id="">
+                            <option value="">---Select Operation---</option>
+                            <option value="add">Add</option>
+                            <option value="subtract">Subtract</option>
+                            <option value="multiply">Multiply</option>
+                            <option value="divide">Divide</option>
+                        </select>
+                        <br />
+                        <button>Calculate</button>
+                        <div>{result}</div>
+                    </div>
+                )
+            }
         const container = document.getElementById('container');
         let root = ReactDOM.createRoot(container)
-        root.render(<Calculator/>)
+        root.render(
+            <div>
+                <Calculator/>
+                <Calculator2/>
+            </div>
+        )
     </script>
 </head>
 <body>
