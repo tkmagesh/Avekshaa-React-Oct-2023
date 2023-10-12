@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Component - Intro</title>
+    <style>
+        .message {
+            font-size: 16pt;
+        }
+        #greet-message{
+            color : blue;
+        }
+    </style>
+    <script type="text/babel">
+        
+        function Products(){
+            let [productsList,setProductsList] = React.useState([])
+            let [newProductName, setNewProductName] = React.useState('');
+            const onBtnAddClick = () => {
+                setProductsList([...productsList, newProductName])
+            };
+            const removeProduct = (pn) => {
+                setProductsList(productsList.filter(p => p !== pn))
+            };
+            let productListItems = productsList.map((pn, idx) => <li key={idx}>
+                <span>{pn}</span>
+                <button onClick={() => removeProduct(pn)}>X</button>
+            </li>)
+            return (
+                <div>
+                <h3>Products</h3>
+                <input type="text" onInput={evt => setNewProductName(evt.target.value)}/>
+                <button onClick={onBtnAddClick}>Add</button>
+                <ul>
+                    {productListItems}
+                </ul>
+                </div>
+            )
+        }
+        
+        const container = document.getElementById('container');
+        let root = ReactDOM.createRoot(container)
+        // root.render(React.createElement(Greeter))    
+        root.render(
+            <div>
+                <Products/>
+            </div>
+        )
+    </script>
+</head>
+<body>
+    
+    <div id="container"></div>
+</body>
+</html>
