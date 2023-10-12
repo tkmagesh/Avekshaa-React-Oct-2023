@@ -23,3 +23,13 @@
 
 ## Reference
 - https://bit.ly/react-videos
+
+## HTML vs JSX
+### JSX
+- Every tag MUST have an close tag
+- Use "htmlFor" in place of "for" attribute
+- Use "className" in place of "class" attribute
+
+## Component
+- Encapsulates Presentation (JSX) + User Interaction logic (events) + State (useState)
+- Reusable
