@@ -17,13 +17,13 @@
     </style>
     <script type="text/babel">
         
-        function Greeter(){
+        function Greeter(props){
             
             let [greetMsg, setGreetMsg]  = React.useState('[default greet message]')
             let [userName, setUserName] = React.useState('Magesh');
 
             const onBtnGreetClick = () => {
-                setGreetMsg(`Hi ${userName}, Have a nice day!`);
+                setGreetMsg(`Hi ${userName}, ${props.template}`);
             }
 
             const onTxtUserNameInput = (evt) => {
@@ -46,8 +46,8 @@
         // root.render(React.createElement(Greeter))    
         root.render(
             <div>
-                <Greeter/>
-                <Greeter />
+                <Greeter template="Have a nice day!" x={100} y={200}/>
+                <Greeter template="Have a good day!"/>
             </div>
         )
     </script>
