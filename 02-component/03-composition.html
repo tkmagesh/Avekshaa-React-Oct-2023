@@ -17,6 +17,11 @@
         }
     </style>
     <script type="text/babel">
+        function CalculatorResult({result}){
+            return (
+                <div className={result >= 0 ? 'positive' : 'negative'}>{result}</div>
+            )
+        }
         function Calculator(){
             const [n1, setN1] = React.useState(0)
             const [n2, setN2] = React.useState(0)
@@ -41,7 +46,7 @@
                     <button onClick={onDivideClick}>Divide</button>
                     {/* <div>{result}</div> */}
                     {/* { result >= 0 ? <div className="positive">{result}</div> : <div className="negative">{result}</div>} */}
-                    <div className={result > 0 ? 'positive' : 'negative'}>{result}</div>
+                    <CalculatorResult result={result}/>
                 </div>
             )
         }
@@ -85,7 +90,8 @@
                         </select>
                         <br />
                         <button onClick={onBtnCalculateClick}>Calculate</button>
-                        <div>{result}</div>
+                        {/* <div>{result}</div> */}
+                        <CalculatorResult result={result} />
                     </div>
                 )
             }
