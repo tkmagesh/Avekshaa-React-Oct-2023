@@ -16,3 +16,10 @@
 
 ## What is React?
 - A library for building Rich Internet Application / Single Page Applications
+
+## Why React?
+- Less code
+- Rendering efficiency (Virtual DOM)
+
+## Reference
+- https://bit.ly/react-videos
