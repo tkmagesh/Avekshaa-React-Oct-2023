@@ -1,9 +1,45 @@
-<h1>Calculator</h1>
-<input type="number" name="" id="">
-<input type="number" name="" id="">
-<br>
-<button>Add</button>
-<button>Subtract</button>
-<button>Multiply</button>
-<button>Divide</button>
-<div>[Result]</div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Component - Intro</title>
+    <script type="text/babel">
+        function Calculator(){
+            const [n1, setN1] = React.useState(0)
+            const [n2, setN2] = React.useState(0)
+            const [result, setResult] = React.useState(0)
+            const onAddClick = () => {
+                setResult(n1 + n2)
+                setN1(0)
+                setN2(0)
+            }
+            const onSubtractClick = () => setResult(n1 - n2)
+            const onMultiplyClick = () => setResult(n1 * n2)
+            const onDivideClick = () => setResult(n1 / n2)
+            return(
+                <div>
+                    <h1>Calculator</h1>
+                    <input type="number" value={n1} onInput={evt => setN1(parseInt(evt.target.value))} />
+                    <input type="number" value={n2} onInput={evt => setN2(parseInt(evt.target.value))} />
+                    <br/>
+                    <button onClick={onAddClick}>Add</button>
+                    <button onClick={onSubtractClick}>Subtract</button>
+                    <button onClick={onMultiplyClick}>Multiply</button>
+                    <button onClick={onDivideClick}>Divide</button>
+                    <div>{result}</div>
+                </div>
+            )
+        }
+        const container = document.getElementById('container');
+        let root = ReactDOM.createRoot(container)
+        root.render(<Calculator/>)
+    </script>
+</head>
+<body>
+    <div id="container"></div>
+</body>
