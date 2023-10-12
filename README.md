@@ -33,3 +33,8 @@
 ## Component
 - Encapsulates Presentation (JSX) + User Interaction logic (events) + State (useState)
 - Reusable
+
+## ES Modules
+- Everything defined in a js/jsx file is by default considered PRIVATE to the file
+- Any public entity has to be explicity EXPORTED
+- Any public entity has to be explicity IMPORTED to use them
