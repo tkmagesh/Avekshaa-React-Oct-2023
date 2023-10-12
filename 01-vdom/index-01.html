@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <title>VDOM</title>
+    <script>
+        (() => {
+            let root;
+            let count = 0;
+            function onBtnRenderClick(){
+                count++
+                // React
+                let h1 = React.createElement('h1', { id: 'heading-1' }, 'React Application - ' + count )
+                root.render(h1)
+                // NOT React (but DOM)
+                
+                document.getElementById('spanCounter').innerText = count;
+            }
+            function onDocumentLoad(){
+                let btnRender = document.getElementById('btnRender');
+                btnRender.addEventListener('click', onBtnRenderClick)
+
+                let container = document.getElementById('container')
+                root = ReactDOM.createRoot(container)
+                
+            }
+            window.addEventListener('DOMContentLoaded', onDocumentLoad)
+        })()
+    </script>
+</head>
+<!-- 
+    ** DOM **
+    let h1 = document.createElement('h1')
+    h1.setAttribute('id', 'heading-1')
+    h1.innerText = 'React Application'
+    document.getElementById('container').appendChild(h1)
+
+    ** VDOM **
+    let h1 = React.createElement('h1', {id : 'heading-1'}, 'React Application')
+    let container = document.getElementById('container')
+    let root = ReactDOM.createRoot(container)
+    root.render(h1)
+ -->
+<body>
+    <button id="btnRender">Render</button>
+    <div>
+        <span>Counter :</span>
+        <span id="spanCounter"></span>
+    </div>
+    <div id="container"></div>
+</body>
+</html>

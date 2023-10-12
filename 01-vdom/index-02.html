@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <title>VDOM</title>
+    <script>
+        (() => {
+            let root;
+            let count = 0;
+            function onBtnRenderClick(){
+                count++
+                let appEle = React.createElement('div', null, 
+                    React.createElement('h1', null, 'React Introduction'),
+                    React.createElement('hr'),
+                    React.createElement('div', null, 
+                        React.createElement('span', null, 'Counter :'),
+                        React.createElement('span', null, count),
+                    ),
+                    React.createElement('div', null, 
+                        React.createElement('h3', null, 'Introduction'),
+                        React.createElement('p', null, 'Ex pariatur elit minim mollit do est ipsum. Ullamco ex commodo ad Lorem. Sit quis in sint labore nulla id incididunt do ullamco officia deserunt. Minim amet amet tempor ut. Occaecat ad ullamco Lorem laborum occaecat do exercitation exercitation nisi. Qui exercitation in officia officia est occaecat velit.'),
+                        React.createElement('p', null, 'Cillum nulla labore aliquip nostrud ullamco minim nostrud culpa. Nulla amet aute laboris occaecat laborum. Est ut incididunt velit Lorem id est consectetur pariatur. Culpa voluptate labore consectetur incididunt officia. Culpa magna in deserunt qui ea laborum elit elit fugiat tempor. Anim labore mollit anim est duis nostrud est. Eu officia minim laboris aliqua reprehenderit sint sunt.'),
+                        React.createElement('p', null, 'Dolore qui laborum aliquip consequat mollit sint consectetur. Cillum incididunt tempor laboris veniam. In ipsum tempor sint tempor Lorem id nisi ad voluptate aute elit quis ad eiusmod. Labore commodo aute dolore adipisicing excepteur est eiusmod do laborum. Voluptate esse qui deserunt eu elit minim ut.'),
+                    ),
+                    React.createElement('div', null, 
+                        React.createElement('h3', null, 'Advantages'),
+                        React.createElement('ul', null, 
+                            React.createElement('li', null, 'Declarative'),
+                            React.createElement('li', null, 'Efficient'),
+                        ),
+
+                    )
+                )
+                console.log(appEle)
+                root.render(appEle)
+            
+            }
+            function onDocumentLoad(){
+                let btnRender = document.getElementById('btnRender');
+                btnRender.addEventListener('click', onBtnRenderClick)
+
+                let container = document.getElementById('container')
+                root = ReactDOM.createRoot(container)
+                
+            }
+            window.addEventListener('DOMContentLoaded', onDocumentLoad)
+        })()
+    </script>
+</head>
+<body>
+    <button id="btnRender">Render</button>
+    <!-- 
+    <div>
+        <span>Counter :</span>
+        <span id="spanCounter"></span>
+    </div> 
+    -->
+    <div id="container"></div>
+</body>
+</html>

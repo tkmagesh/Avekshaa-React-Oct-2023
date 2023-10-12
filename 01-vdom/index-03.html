@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>VDOM</title>
+    <script type="text/babel">
+    
+        let root;
+        let count = 0;
+        function onBtnRenderClick(){
+            count++
+            let appEle = (
+                <div>
+                    <h1>React Intro</h1>
+                    <hr/>
+                    <div>
+                        <span>Counter :</span>
+                        <span>{count}</span>
+                    </div>
+                    <div>
+                        <h3>Introduction</h3>
+                        <p>In veniam anim id dolor anim enim et laboris. Proident voluptate sint eiusmod magna consectetur culpa veniam sit commodo. Anim ea eiusmod ipsum aliqua minim culpa sint sunt eiusmod reprehenderit ad.</p>
+                        <p>Ex est elit aliquip cillum culpa nisi id exercitation deserunt ut officia consectetur ipsum eu. Nulla et cillum deserunt reprehenderit. Nisi officia tempor veniam elit eu. Anim aliqua ea velit cupidatat elit eiusmod ad sint eu esse. Eiusmod nulla reprehenderit veniam laborum laborum do ad occaecat.</p>
+                        <p>Consequat occaecat nostrud non laboris amet irure deserunt magna fugiat deserunt cillum. Aliquip ea adipisicing Lorem dolore nisi sunt. Fugiat velit quis deserunt et enim consequat. Voluptate enim dolore in tempor labore do duis nulla velit eu sint laboris aute. Velit id id amet sint pariatur.</p>
+                    </div>
+                    <div>
+                        <h3>Advantages</h3>
+                        <ul>
+                            <li>Declaration</li>
+                            <li>Efficient</li>
+                        </ul>
+                    </div>
+                </div>
+            )
+            console.log(appEle)
+            root.render(appEle)
+        
+        }
+        function onDocumentLoad(){
+            let btnRender = document.getElementById('btnRender');
+            btnRender.addEventListener('click', onBtnRenderClick)
+
+            let container = document.getElementById('container')
+            root = ReactDOM.createRoot(container)
+            
+        }
+        window.addEventListener('load', onDocumentLoad)
+        
+    </script>
+</head>
+<body>
+    <button id="btnRender">Render</button>
+    <!-- 
+    <div>
+        <span>Counter :</span>
+        <span id="spanCounter"></span>
+    </div> 
+    -->
+    <div id="container"></div>
+</body>
+</html>
