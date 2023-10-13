@@ -38,3 +38,13 @@
 - Everything defined in a js/jsx file is by default considered PRIVATE to the file
 - Any public entity has to be explicity EXPORTED
 - Any public entity has to be explicity IMPORTED to use them
+
+## State
+### UI State
+- Primarily deals with the presentational responsibilities of the component
+- ONLY the component is interested in any change of this state
+- Feel free to maintain this in the component (using useState)
+### App State
+- Primarily deals with the core domain logic of the application
+- Any changes in this might need to be recognized and acted upon by the whole application
+- DONOT maintain this in the Component. Use the Store for this state.
