@@ -5,8 +5,36 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store'
 import Bugs from './bugs';
+import Projects from './projects';
 import { Provider } from 'react-redux'
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
+function HomeComponent(){
+  return (
+    <>
+    <h3>Home</h3>
+    <div>Eu cupidatat veniam fugiat cillum tempor duis minim cillum laborum qui cupidatat magna aliquip pariatur. Tempor officia labore exercitation nostrud quis sint esse pariatur. Cillum labore anim fugiat enim ad incididunt. Nostrud sunt nisi laboris ipsum aliqua. Nisi sunt occaecat duis esse qui.</div>
+    </>
+  )
+}
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomeComponent/>,
+  },
+  {
+    path: "/bugs",
+    element : <Bugs/>
+  },
+  {
+    path : "/projects",
+    element : <Projects/>
+  }
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,8 +42,14 @@ root.render(
     <Provider store={store}>
       <h1>Bug Tracker</h1>
       <hr/>
-      <Bugs/>
+      <div>
+        <span> [ <a href={`/bugs`}>Bugs</a> ] </span>
+        <span> [ <a href={`/projects`}>Projects</a> ] </span>
+      </div>
+      <RouterProvider router={router} >
+    </RouterProvider>
     </Provider>
+
   </React.StrictMode>
 );
 

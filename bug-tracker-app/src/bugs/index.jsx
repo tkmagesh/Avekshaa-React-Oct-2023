@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import BugStats from './components/bug-stats';
 import BugEdit from './components/bug-edit';
 import BugList from './components/bug-list';
@@ -8,6 +8,12 @@ import * as bugActionCreators from './actions';
 import { bindActionCreators } from 'redux';
 
 
+const bugsSelector = bugsState => {
+    const bugs = bugsState,
+      count = bugs.length,
+      closedCount = bugs.reduce((prevResult, bug) => bug.isClosed ? prevResult + 1 : prevResult, 0);
+    return {bugs, count, closedCount }
+}
 
 function Bugs() {
     /* 
@@ -15,12 +21,19 @@ function Bugs() {
     const closedCount = bugs.reduce((prevResult, bug) => bug.isClosed ? prevResult + 1 : prevResult, 0); 
     */
     
+    /* 
     const {bugs, count, closedCount} = useSelector(storeState => {
       const bugs = storeState.bugsState,
         count = bugs.length,
         closedCount = bugs.reduce((prevResult, bug) => bug.isClosed ? prevResult + 1 : prevResult, 0);
       return {bugs, count, closedCount }
-    })
+    }) 
+    */
+    
+    const bugsState = useSelector(storeState => storeState.bugsState);
+    // const {bugs, count, closedCount} = bugsSelector(bugsState);
+    const {bugs, count, closedCount} = useMemo(() => bugsSelector(bugsState), [bugsState])
+
     const dispatch = useDispatch() 
     const {create, remove, load} = bindActionCreators(bugActionCreators, dispatch)
 

@@ -48,3 +48,6 @@
 - Primarily deals with the core domain logic of the application
 - Any changes in this might need to be recognized and acted upon by the whole application
 - DONOT maintain this in the Component. Use the Store for this state.
+
+## Routing
+- Reference - https://reactrouter.com/en/main/start/tutorial
