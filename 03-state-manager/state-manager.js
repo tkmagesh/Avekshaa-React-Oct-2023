@@ -18,6 +18,17 @@ let StateManager = (()=>{
             _subscriber()
     }
 
+    function bindActionCreators(actionCreators, dispatch){
+        const actionDispatchers = {}
+        for (let key in actionCreators){
+            actionDispatchers[key] = function(...args){
+                const action = actionCreators[key](...args)
+                dispatch(action);
+            }
+        }
+        return actionDispatchers;
+    }
+
     function createStore(reducer){
         if (typeof reducer !== 'function'){
             throw new Error('reducer function is mandatory to create a store');
@@ -31,5 +42,5 @@ let StateManager = (()=>{
         }
     }
 
-    return { createStore };
+    return { createStore, bindActionCreators };
 })()

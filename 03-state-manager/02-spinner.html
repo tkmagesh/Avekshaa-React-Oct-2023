@@ -10,19 +10,19 @@
     <title>StateManager - Intro</title>
     <!-- 
         01. initial version
+        02. remove the dependency on the store from the component
 
      -->
     <script type="text/babel">
         
-        function Spinner({store}){
-            const value = store.getState()
+        function Spinner({value, dispatch}){
             const onDecrementClick = () => {
                 const dec_action = { type : 'DECREMENT'}
-                store.dispatch(dec_action);
+                dispatch(dec_action);
             }
             const onIncrementClick = () => {
                 const inc_action = { type : 'INCREMENT'}
-                store.dispatch(inc_action);
+                dispatch(inc_action);
             }
             return (
                 <div>
@@ -47,9 +47,10 @@
 
         // const value = store.getState()
         function renderApp(){
+            const value = store.getState()
             root.render(
                 <div>
-                    <Spinner store={store}/>     
+                    <Spinner value={value} dispatch={store.dispatch}/>     
                 </div>
             )
         }

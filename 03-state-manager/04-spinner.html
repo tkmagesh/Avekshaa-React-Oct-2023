@@ -10,19 +10,18 @@
     <title>StateManager - Intro</title>
     <!-- 
         01. initial version
-
+        02. remove the dependency on the store from the component
+        03. delegate the responsibility of creating actions to 'action creators'
+        04. delegate the responsibility of dispatch actions to 'action dispatchers'
      -->
     <script type="text/babel">
         
-        function Spinner({store}){
-            const value = store.getState()
+        function Spinner({value, actionDispatchers}){
             const onDecrementClick = () => {
-                const dec_action = { type : 'DECREMENT'}
-                store.dispatch(dec_action);
+                actionDispatchers.decrement();
             }
             const onIncrementClick = () => {
-                const inc_action = { type : 'INCREMENT'}
-                store.dispatch(inc_action);
+                actionDispatchers.increment();
             }
             return (
                 <div>
@@ -43,13 +42,39 @@
 
         const container = document.getElementById('container');
         let root = ReactDOM.createRoot(container)
-        // root.render(React.createElement(Greeter))    
+        
 
-        // const value = store.getState()
+        const spinnerActionCreators = {
+            decrement(){
+                const action = { type : 'DECREMENT'};
+                return action;
+            },
+            increment(){
+                const action = {type : 'INCREMENT'};
+                return action;
+            }
+        }
+
+        function bindActionCreators(spinnerActionCreators, dispatch){
+            const actionDispatchers = {
+                decrement() {
+                    const action = spinnerActionCreators.decrement();
+                    dispatch(action);
+                },
+                increment() {
+                    const action = spinnerActionCreators.increment();
+                    dispatch(action);
+                }
+            }
+            return actionDispatchers;
+        }
+
+        const spinnerActionDispatchers = bindActionCreators(spinnerActionCreators, store.dispatch);
         function renderApp(){
+            const value = store.getState()
             root.render(
                 <div>
-                    <Spinner store={store}/>     
+                    <Spinner value={value} actionDispatchers={spinnerActionDispatchers} />     
                 </div>
             )
         }
