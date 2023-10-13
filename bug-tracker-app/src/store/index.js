@@ -1,6 +1,6 @@
-import { combineReducers, createStore } from 'redux'
+import { combineReducers, createStore, applyMiddleware } from 'redux'
 import bugsReducer from "../bugs/reducers/bugsReducer";
-
+import thunk from 'redux-thunk';
 
 // the following reducer should be refactored
 const initialProjectsState = [
@@ -15,7 +15,22 @@ const rootReducer = combineReducers({
     bugsState : bugsReducer,
     projectsState : projectsReducer
 })
-const store = createStore(rootReducer);
 
+function customThunkMiddleware(store){
+    return function(next){
+        return function(action){
+            if (typeof action === 'function'){
+                return action(store.dispatch, store.getState)
+            }
+            return next(action)
+        }
+    }
+}
+// using redux-thunk
+// const store = createStore(rootReducer, applyMiddleware(thunk));
+
+
+//using custom thunk
+const store = createStore(rootReducer, applyMiddleware(customThunkMiddleware));
 export default store;
 

@@ -1,10 +1,12 @@
+
+import bugApi from '../services/bugApi';
 export function load(){
-    return {
-        type : 'BUG_LOAD',
-        payload : [
-            {id : 1, name : 'Server communication failure', isClosed : false, createdAt : new Date()},
-            {id : 2, name : 'User actions not recognized', isClosed : true, createdAt : new Date()},
-            {id : 3, name : 'Authentication failure', isClosed : false, createdAt : new Date()},
-        ]
+    return async function(dispatch){
+        const bugs = await bugApi.loadBugs()
+        const load_action = {
+            type : 'BUG_LOAD',
+            payload : bugs
+        }
+        dispatch(load_action)
     }
 }
