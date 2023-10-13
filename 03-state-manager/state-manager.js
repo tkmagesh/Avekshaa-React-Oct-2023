@@ -24,7 +24,11 @@ let StateManager = (()=>{
         }
         _reducer = reducer;
         _currentState = _reducer(undefined, _init_action) // to initialize the store with the default state (much before any action is dispatched)
-        return { getState, subscribe, dispatch }
+        return { 
+            getState : getState, 
+            subscribe : subscribe, 
+            dispatch :dispatch
+        }
     }
 
     return { createStore };

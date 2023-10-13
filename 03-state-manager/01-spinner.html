@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="state-manager.js"></script>
+    <title>StateManager - Intro</title>
+    <style>
+       
+    </style>
+    <script type="text/babel">
+        
+        function Spinner({store}){
+            const value = store.getState()
+            const onDecrementClick = () => {
+                const dec_action = { type : 'DECREMENT'}
+                store.dispatch(dec_action);
+            }
+            const onIncrementClick = () => {
+                const inc_action = { type : 'INCREMENT'}
+                store.dispatch(inc_action);
+            }
+            return (
+                <div>
+                    <button onClick={onDecrementClick}>Decrement</button>
+                    <span>[{value}]</span>
+                    <button onClick={onIncrementClick}>Increment</button>
+                </div>
+            )
+        }
+
+        function spinnerReducer(currentState = 50, action){
+            if (action.type === 'INCREMENT') return currentState + 1;
+            if (action.type === 'DECREMENT') return currentState - 1;
+            return currentState
+        }
+
+        const store = StateManager.createStore(spinnerReducer);
+
+        const container = document.getElementById('container');
+        let root = ReactDOM.createRoot(container)
+        // root.render(React.createElement(Greeter))    
+
+        // const value = store.getState()
+        function renderApp(){
+            root.render(
+                <div>
+                    <Spinner store={store}/>     
+                </div>
+            )
+        }
+        renderApp();
+        store.subscribe(renderApp);
+
+    </script>
+</head>
+<body>
+    
+    <div id="container"></div>
+</body>
+</html>
